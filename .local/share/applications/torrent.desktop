@@ -1,4 +1,4 @@
 [Desktop Entry]
 Type=Application
 Name=Torrent
-Exec=/home/krishna/.local/bin/toradd %U
+Exec=/usr/bin/env toradd %U
