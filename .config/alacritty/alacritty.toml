@@ -1,6 +1,3 @@
-live_config_reload = true
-working_directory = "None"
-
 [colors]
 draw_bold_text_with_bright_colors = false
 transparent_background_colors = false
@@ -491,7 +488,7 @@ dynamic_title = true
 #gtk_theme_variant = "None"
 #history = 10000
 #multiplier = 3
-opacity = 0.9
+opacity = 0.98
 startup_mode = "Windowed"
 
 [window.class]
@@ -509,3 +506,7 @@ y = 3
 [window.position]
 x = 6
 y = 3
+
+[general]
+live_config_reload = true
+working_directory = "None"

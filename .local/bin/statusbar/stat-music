@@ -3,11 +3,11 @@ stat="$(mpc | awk 'FNR == 2 {print $1}')"
 detail="$(mpc current -f "%title% %artist% %file%" | cut -c-20)"
 
 if [ "$stat" = "[paused]" ]; then
-        out=" Paused"
+        out="⏸ Paused"
 elif [ "$stat" = "[playing]" ]; then
-        out=" Playing"
+        out="⏯️ Playing"
 else
-        out=""
+        out="⏹"
 fi
 
 echo "$out"

@@ -18,7 +18,7 @@ read opt
 case "$opt" in
 	1) yt-dlp --extract-audio --embed-thumbnail --audio-format mp3 $link ;;
 	2) yt-dlp --extract-audio --embed-thumbnail --audio-format flac $link ;;
-	3) yt-dlp --extract-audio --embed-thumbnail --audio-format m4a $link ;;
+	3) yt-dlp --extract-audio --embed-thumbnail --embed-metadata --add-metadata -o "%(title)s.%(ext)s" --audio-format m4a $link ;;
 	4) yt-dlp -f 'bestvideo[height=720][ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --embed-subs --merge-output-format mp4 $link ;;
 	5) yt-dlp -f 'bestvideo[height=1080][ext=mp4]+bestaudio[ext=m4a]/bestvideo+bestaudio' --embed-subs --merge-output-format mp4 $link ;;
 esac

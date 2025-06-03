@@ -3,9 +3,9 @@ connec="$(cat /sys/class/net/w*/operstate)"
 ssid="$(nmcli -t -f NAME connection show --active)"
 
 if [ "$connec" = "up" ]; then
-        stat="$(awk '/^\s*w/ { print "", int($3 * 100 / 70) "% " }' /proc/net/wireless)"
+        stat="$(awk '/^\s*w/ { print "📶", int($3 * 100 / 70) "% " }' /proc/net/wireless)"
 else
-        stat=" Disconnected"
+        stat="🛑 Disconnected"
 fi
 
 echo "$stat"

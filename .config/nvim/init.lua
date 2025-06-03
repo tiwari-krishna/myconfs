@@ -1,8 +1,0 @@
-require("conf.pack")
-require("conf.treesit")
-require("conf.settings")
-require("conf.keymaps")
-require("conf.theme")
-require("conf.cmpl")
-require("conf.toggleterm")
-require("conf.lsp")

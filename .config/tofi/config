@@ -142,7 +142,7 @@
 ### Text layout
 #
 	# Prompt to display.
-	prompt-text = "Select:"
+	prompt-text = "Select: "
 
 	# Extra horizontal padding between prompt and input.
 	prompt-padding = 3
@@ -167,8 +167,8 @@
 ### Window theming
 #
 	# Width and height of the window. Can be pixels or a percentage.
-	width = 700
-	height = 400
+	width = 1000 
+	height = 600
 
 	# Window background color
 	background-color = #1B1D1E
@@ -180,13 +180,13 @@
 	outline-color = #8ec07c
 
 	# Width of the border in pixels.
-	border-width = 1
+	border-width = 0
 
 	# Border color
 	border-color = #8ec07c
 
 	# Radius of window corners in pixels.
-	corner-radius = 0
+	corner-radius = 10
 
 	# Padding between borders and text. Can be pixels or a percentage.
 	padding-top = 2
@@ -239,7 +239,7 @@
 	hide-cursor = true
 
 	# Show a text cursor in the input field.
-	text-cursor = false
+	text-cursor = true
 
 	# Sort results by number of usages in run and drun modes.
 	history = false
@@ -279,7 +279,7 @@
 
 	# If true, directly launch applications on selection when in drun mode.
 	# Otherwise, just print the command line to stdout.
-	drun-launch = false
+	drun-launch = true
 
 	# The terminal to run terminal programs in when in drun mode.
 	# This option has no effect if drun-launch is set to true.

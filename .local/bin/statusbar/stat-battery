@@ -12,7 +12,7 @@ case "$stat" in
 		*) exit 1 ;;
 	esac
 
-echo " $icon $Capacity%"
+echo "🔋 $icon $Capacity%"
 
 case $BLOCK_BUTTON in
     1) notify-send "Battery Status" "🔋 $stat at $Capacity%";;

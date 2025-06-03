@@ -1,5 +1,9 @@
-#Vi mode
+#Vi stuff
 set -o vi
+export MANPAGER='nvim +Man!'
+
+# Set up fzf key bindings and fuzzy completion
+eval "$(fzf --bash)"
 
 #Archiver
 ex ()
@@ -27,7 +31,6 @@ ex ()
    fi
 }
 
-
 #Aliases
 alias ls='ls --color=always --group-directories-first'
 alias grep='grep --color=auto'
@@ -43,16 +46,35 @@ alias vim="nvim "
 alias svim="sudo nvim "
 alias ka='killall '
 alias pac='sudo pacman '
-alias apt='sudo apt '
 alias rm='rm -i'
-alias xbins='sudo xbps-install'
-alias xbrm='sudo xbps-remove'
-alias dnf='sudo dnf'
 alias q='exit'
 alias pc='pandoc $1 -t beamer -o $($1 | sed 's/\.[^.]*$//').pdf'
 alias sphone='ssh -p 8022 u0_a169@192.168.1.33'
 alias mphone='sshfs u0_a169@192.168.1.33:storage /home/krishna/mnt/ -o follow_symlinks -p 8022'
 alias cphis='cliphist list | wofi --dmenu | cliphist decode | wl-copy'
-alias gam='cd ~/Data/Media/Games'
 
-export PS1="\[\e[01;31m\][\[\e[m\]\[\e[01;38;5;172m\]\u\[\e[m\]@\[\e[01;38;5;153m\]\h\[\e[m\] \[\e[01;38;5;214m\]\W\[\e[m\]\[\e[01;31m\]]\[\e[m\]\\$ "
+#export PS1="\[\e[01;31m\][\[\e[m\]\[\e[01;38;5;172m\]\u\[\e[m\]@\[\e[01;38;5;153m\]\h\[\e[m\] 󰥳 \[\e[01;38;5;214m\]\W\[\e[m\]\[\e[01;31m\]]\[\e[m\]\\$ "
+
+function parse_git_dirty {
+  STATUS="$(git status 2> /dev/null)"
+  if [[ $? -ne 0 ]]; then printf ""; return; else printf " ["; fi
+  if echo "${STATUS}" | grep -c "renamed:"         &> /dev/null; then printf " >"; else printf ""; fi
+  if echo "${STATUS}" | grep -c "branch is ahead:" &> /dev/null; then printf " !"; else printf ""; fi
+  if echo "${STATUS}" | grep -c "new file::"       &> /dev/null; then printf " +"; else printf ""; fi
+  if echo "${STATUS}" | grep -c "Untracked files:" &> /dev/null; then printf " ?"; else printf ""; fi
+  if echo "${STATUS}" | grep -c "modified:"        &> /dev/null; then printf " *"; else printf ""; fi
+  if echo "${STATUS}" | grep -c "deleted:"         &> /dev/null; then printf " -"; else printf ""; fi
+  printf " ]"
+}
+
+parse_git_branch() {
+  git rev-parse --abbrev-ref HEAD 2> /dev/null
+}
+
+prompt_comment() {
+    DIR="$HOME/.local/share/promptcomments/"
+    MESSAGE="$(find "$DIR"/*.txt | shuf -n1)"
+    cat "$MESSAGE"
+}
+
+export PS1="\[\e[1;31m\]\$(parse_git_branch)\[\033[34m\]\$(parse_git_dirty) \[\033[1;33m\] 󰥳 \[\e[1;37m\] \w \[\e[1;36m\]\[\e[0;37m\] "

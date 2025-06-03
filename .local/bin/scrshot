@@ -1,14 +1,18 @@
-#!/bin/sh
+#!/bin/bash
 
 DIR="$HOME/Data/screenshots"
+
+if [ -z "$2" ]; then
+    set -- "$1" "NewSS"
+fi
 
 if [ ! -d "$DIR" ]; then
   echo "$DIR doesn't exist." && mkdir $DIR
 fi
 
 case "$1" in
-	sel) grim -g "$(slurp)" $DIR/$(date +"%Y-%m-%d_%H-%M-%S").png && exit 0 ;;
-	fullscr) grim $DIR/$(date +"%Y-%m-%d_%H-%M-%S").png && exit 0 ;;
+	sel) grim -g "$(slurp)" $DIR/$(date +"$2%Y-%m-%d_%H-%M-%S").png && exit 0 ;;
+	fullscr) grim $DIR/$(date +"$2%Y-%m-%d_%H-%M-%S").png && exit 0 ;;
 	cpy) grim -g "$(slurp)" - | wl-copy && exit 0 ;;
 	*) notify-send "Sorry opt not found" ;;
 esac
