@@ -1,0 +1,186 @@
+/* S E T T I N G S */
+
+:root {
+  --navbarWidth     : 600px;
+  --animationSpeed  : 0.15s;
+  --color-main-bg: #0F0F12;
+  --color-secondary-bg: #1A1A1D;
+}
+
+
+  /* Hiding Buttons */
+  #tracking-protection-icon-container,
+  #back-button, #forward-button,
+  #identity-permission-box, 
+  #page-action-buttons, 
+  #identity-icon-box, 
+  #firefox-view-button, 
+  #tabs-newtab-button,
+  #appMenu-help-button2,
+  .tab-close-button,
+  .titlebar-buttonbox-container,
+  #appMenu-new-private-window-button2, 
+  #appMenu-find-button2, #reload-button,
+  #private-browsing-indicator-with-label,
+  #appMenu-print-button2, 
+  #appMenu-save-file-button2,
+  #appMenuRecentlyClosedWindows,
+  #appMenu-new-tab-button2{
+    display: none;
+  }
+  #unified-extensions-button, #PanelUI-button {
+    transition: opacity 300ms ease-in-out;
+    opacity: 0;
+  }
+  #unified-extensions-button:hover, #PanelUI-button:hover {
+    opacity: 1;
+  }
+  menupopup, panel {
+    border: none;
+    border-radius: 10px !important;
+    --panel-border-color: #FFFFFF !important;
+  }
+  :is(menupopup, panel)[type="arrow"] {
+    border-radius: 15px !important;
+    border: none !important;
+  }
+  panel-viewcontainer, panelview {
+    background-color: var(--color-main-bg) !important;
+  }
+  .panel-header, .panel-subview-body {
+    background-color: var(--color-main-bg) !important;
+  }
+/*============================================================================*/
+
+
+/* Oneline tweak */
+
+#TabsToolbar {
+  margin-left : var(--navbarWidth) !important;
+  height      : 30px !important;
+}
+
+#nav-bar {
+  background-color: var(--color-main-bg) !important;
+  margin-right: calc(100vw - var(--navbarWidth)) !important;
+}
+
+#urlbar-container {
+  min-width   : 0px !important;
+}
+
+:root[uidensity="compact"] #nav-bar {
+  margin-top  : -37px !important;
+  height      : 35px !important;
+}
+
+:root:not([uidensity="compact"]):not([uidensity="touch"]) #nav-bar {
+  margin-top  : -44px !important;
+  height      : 44px !important;
+}
+
+:root[uidensity="touch"] #nav-bar {
+  margin-top  : -49px !important;
+  height      : 49px !important;
+}
+
+
+/* Dragging space */
+:root[sizemode="maximized"] #TabsToolbar {
+  margin-top: 1px;
+}
+
+#TabsToolbar {
+  margin-top: 1px;
+}
+
+
+/* Simplifying interface */
+
+#nav-bar {
+  background  : none !important;
+  box-shadow  : none !important;
+}
+
+#navigator-toolbox {
+  background-color: var(--color-main-bg) !important;
+  border      : none !important;
+}
+
+.titlebar-spacer {
+  display     : none !important;
+}
+
+#urlbar-background,
+#searchbar {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+  background-color: var(--color-main-bg) !important;
+}
+
+#urlbar:not(:hover):not([breakout][breakout-extend]) > #urlbar-background {
+  box-shadow  : none !important;
+  background  : none !important;
+}
+
+
+/* Hide urlbar elements when not active */
+
+.urlbar-icon, #userContext-indicator, #userContext-label {
+  fill        : transparent !important;
+  background  : transparent !important;
+  color       : transparent !important;
+}
+
+#urlbar:hover .urlbar-icon,
+#urlbar:active .urlbar-icon, 
+#urlbar[focused] .urlbar-icon {
+  fill        : var(--toolbar-color) !important;
+}
+
+
+/* animations */
+.subviewbutton,
+#urlbar-background,
+.urlbar-icon,
+#userContext-indicator,
+#userContext-label,
+.urlbar-input-box, 
+#identity-box,
+#tracking-protection-icon-container,
+[anonid=urlbar-go-button],
+.urlbar-icon-wrapper,
+#tracking-protection-icon,
+#identity-box image,
+stack,
+tab:not(:active) .tab-background,
+tab:not([beforeselected-visible])::after,
+tab[visuallyselected] .tab-background::before,
+tab[visuallyselected] .tab-background::before,
+.tab-close-button {
+  transition  : var(--animationSpeed) !important;
+}
+
+.tabbrowser-tab .tab-background {
+  border-radius: 16px !important;
+  transition: background-color 300ms ease, transform 300ms ease;
+}
+
+.tabbrowser-tab[selected="true"] .tab-background {
+  border: 1px solid #5394c4;
+  background-color: var(--color-secondary-bg) !important;
+}
+.tabbrowser-tab:hover .tab-background {
+  transform: scale(0.96);
+  background-color: var(--color-secondary-bg) !important;
+}
+
+#urlbar {
+    border-radius: 2px;
+    padding: 0px !important;
+    color: #ffffff !important;
+    height: 25px;
+    font-family: Fira Sans !important;
+    font-size: 12px;
+}
