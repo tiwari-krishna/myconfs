@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Ensure a markdown file is provided
+if [[ -z "$1" || ! -f "$1" ]]; then
+  echo "Usage: $0 file.md"
+  exit 1
+fi
+
+# Ensure ~/.cache exists
+mkdir -p ~/.cache
+
+# Convert Markdown to HTML
+pandoc "$1" -o ~/.cache/html.html
+
+# Open in browser
+$BROWSER ~/.cache/html.html &>/dev/null &

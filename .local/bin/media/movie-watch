@@ -5,11 +5,11 @@ movie_dir="$HOME/Data/Media/Movies"
 show_dir="$HOME/Data/Media/Shows"
 music_dir="$HOME/Data/Media/Music"
 
-# Check if tofi and mpv are installed
-command -v tofi >/dev/null 2>&1 || { echo >&2 "tofi is required but not installed. Aborting."; exit 1; }
+# Check if fuzzel and mpv are installed
+command -v fuzzel >/dev/null 2>&1 || { echo >&2 "fuzzel is required but not installed. Aborting."; exit 1; }
 command -v mpv >/dev/null 2>&1 || { echo >&2 "mpv is required but not installed. Aborting."; exit 1; }
 
-cho=$(printf "Movie\nShow\nMusic\nkillMPV" | tofi --prompt-text "Select what to watch: ")
+cho=$(printf "Movie\nShow\nMusic\nkillMPV" | fuzzel --dmenu --prompt "Select what to watch: ")
 
 # Select what to watch
 case "$cho" in 
@@ -25,9 +25,9 @@ if [ -z "$media_dir" ]; then
     notify-send "No media directory selected." && exit 1
 fi
 
-# Find media files and use tofi to select one
+# Find media files and use fuzzel to select one
 media_files=$(find "$media_dir" -type f \( -iname "*.mp4" -o -iname "*.m4a" -o -iname "*.ogg" -o -iname "*.mov" -o -iname "*.mkv" -o -iname "*.wav" -o -iname "*.ape" -o -iname "*.avi" -o -iname "*.mp3" -o -iname "*.flac" \) | sed "s|^$media_dir/||" )
-selected_file=$(echo "$media_files" | sed 's|^\./||' | tofi --prompt-text "Select a media file:")
+selected_file=$(echo "$media_files" | sed 's|^\./||' | fuzzel --dmenu --prompt "Select a media file:")
 
 # Check if the user selected a file
 if [ -n "$selected_file" ]; then

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+Proj_dir="$HOME/repo"
+
+# Check if the directory exists, if not, create it
+if [ ! -d "$Proj_dir" ]; then
+    echo "Directory $Proj_dir does not exist. Creating it..."
+    mkdir -p "$Proj_dir" || {
+        echo "Failed to create directory $Proj_dir. Exiting."
+        exit 1
+    }
+fi
+
+# Collect file/folder list non-recursively
+proj=$(ls -1 --color=never "$Proj_dir")
+proj="$proj\nCreate a new Project."
+
+# Run fzf
+selected_file=$(printf "%b" "$proj" | fzf --prompt="Select or create a new file: ")
+
+if [ -z "$selected_file" ]; then
+    echo "No directory selected. Exiting."
+    exit 0
+
+elif [ "$selected_file" = "Create a new Project." ]; then
+    read -p "Enter the name for the new project: " new_folder_name
+    new_folder="$Proj_dir/$new_folder_name"
+    if [ -e "$new_folder" ]; then
+        echo "Folder already exists: $new_folder"
+    else
+        mkdir "$new_folder"
+        echo "Created new folder: $new_folder"
+    fi
+    cd "$new_folder" && $EDITOR .
+else
+    cd "$Proj_dir/$selected_file" && $EDITOR .
+fi

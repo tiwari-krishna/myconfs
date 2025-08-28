@@ -1,0 +1,247 @@
+{
+    "layer": "top", // Waybar at top layer
+    "position": "right", // Waybar position (top|bottom|left|right)
+    "ipc": true,
+    //"height": 720, // Waybar height (to be removed for auto height)
+    "spacing": 10, // Gaps between modules (4px)
+
+    // Choose the order of the modules
+    "modules-left": [ "sway/workspaces"],
+    "modules-center": ["group/mpd", "group/pulseaudio", "group/network", "group/battery", "group/date", "group/time"],
+    "modules-right": ["tray"],
+
+    //Modules configuration
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "α",
+            "2": "β",
+            "3": "γ",
+            "4": "δ",
+            "5": "ε",
+            "6": "ζ",
+            "7": "η",
+            "8": "θ",
+            "9": "ι",
+            "10": "κ",
+        }
+    },
+
+	"group/mpd": {
+		"orientation": "vertical",
+		"modules": [
+			"mpd",
+			"mpd#1",
+		]
+    },
+
+    "mpd": {
+        "format": " {stateIcon}",
+        "format-disconnected": "󰝛 ",
+        "format-stopped": " ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD {stateIcon} {title}",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+
+        "mpd#1": {
+        "format": "{randomIcon} {singleIcon}",
+        "format-disconnected": "",
+        "format-stopped": "",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "random-icons": {
+            "on": ""
+        },
+        "single-icons": {
+            "on": "󰑘"
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD {stateIcon} {title}",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+
+    "tray": {
+        "icon-size": 14,
+        "spacing": 8
+
+    },
+
+    //"clock": {
+        // "timezone": "America/New_York",
+     //   "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        //"format-alt": "{:%b %d %a %I:%M %p}",
+      //  "format": "📅 {:%b %d %a  🕛 %I:%M %p}"
+   // },
+
+    "clock": {
+        // "timezone": "America/New_York",
+	"interval": 1,
+	"format": "{:%a}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+
+    "clock#2": {
+        // "timezone": "America/New_York",
+	"interval": 1,
+	"format": "{:%b}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+
+    "clock#3": {
+        // "timezone": "America/New_York",
+	"interval": 1,
+	"format": "{:%d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+
+    "clock#4": {
+        // "timezone": "America/New_York",
+	"interval": 60,
+	"format": "{:%H}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+
+    "clock#5": {
+        // "timezone": "America/New_York",
+	"interval": 30,
+	"format": "{:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    },
+
+    "group/date": {
+		"orientation": "vertical",
+		"modules": [
+			"clock",
+			"clock#2",
+			"clock#3"
+		]
+    },
+
+	"group/time": {
+		"orientation": "vertical",
+		"modules": [
+			"clock#4",
+			"clock#5",
+		]
+    },
+
+	"group/battery": {
+		"orientation": "vertical",
+		"modules": [
+			"battery",
+			"battery#1",
+		]
+    },
+
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-charging": "",
+        "format-plugged": "",
+        "format-alt": "{icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", ""]
+    },
+
+    "battery#1": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}%",
+        "format-charging": "{capacity}%",
+        "format-plugged": "{capacity}%",
+        "format-alt": "{time}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+    },
+
+	"group/network": {
+		"orientation": "vertical",
+		"modules": [
+			"network",
+			"network#1",
+		]
+    },
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "",
+        "format-ethernet": "󰈀",
+        "tooltip-format": "󱘖  {ifname} via {gwaddr}",
+        "format-linked": "󱘖",
+        "format-disconnected": "󰈂",
+    },
+
+    "network#1": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{signalStrength}%",
+        "format-ethernet": "ETH",
+        "tooltip-format": " 󱘖  {ifname} via {gwaddr}",
+        "format-linked": "(No IP)",
+        "format-disconnected": "NC",
+    },
+
+	"group/pulseaudio": {
+		"orientation": "vertical",
+		"modules": [
+			"pulseaudio",
+			"pulseaudio#2",
+		]
+    },
+
+    "pulseaudio": {
+        // "scroll-step": 5, // %, can be a float
+        "format": "{volume}%",
+        "format-bluetooth": "{volume}% ",
+        "format-bluetooth-muted": " {icon}",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "pulseaudio#2": {
+        // "scroll-step": 5, // %, can be a float
+        "format": "{icon}",
+        "format-bluetooth": "{icon} {format_source}",
+        "format-bluetooth-muted": "{format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+}
+ 

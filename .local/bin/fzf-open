@@ -1,0 +1,22 @@
+#!/bin/bash
+
+fzf_open() {
+    selected=$(find . -type f 2>/dev/null | fzf --height 40% --reverse --border)
+    if [ -n "$selected" ]; then
+        f="$selected"
+        # Call the open logic directly as a shell function
+        case $(file --mime-type "$f" -bL) in
+            text/html) nvim "$f" ;;
+            text/*) $EDITOR "$f" ;;
+            audio/*) mpv "$f" ;;
+            video/*) setsid mpv "$f" >/dev/null 2>&1 & ;;
+            image/x-xcf) setsid -f gimp "$f" >/dev/null 2>&1 ;;
+            image/*) setsid -f imv "$f" >/dev/null 2>&1 ;;
+            application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura "$f" >/dev/null 2>&1 ;;
+            application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template|application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.ms-powerpoint|application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template|application/vnd.oasis.opendocument.formula|application/vnd.oasis.opendocument.database) setsid -f libreoffice "$f" >/dev/null 2>&1 ;;
+            *) xdg-open "$f" >/dev/null 2>&1 ;;
+        esac
+    fi
+}
+
+fzf_open

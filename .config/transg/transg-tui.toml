@@ -1,0 +1,11 @@
+refresh-interval = 1200
+traffic-monitor = "upload"
+show-icons = true
+
+[[connections]]
+name = "localhost"
+username = ""
+password = ""
+url = "http://127.0.0.1:9091/transmission/rpc"
+download-dir = ""
+local-download-dir = ""

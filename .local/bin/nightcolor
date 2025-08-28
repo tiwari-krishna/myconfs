@@ -1,0 +1,9 @@
+#!/bin/bash
+
+pkill -x gammastep 2>/dev/null
+
+if [ "$1" -eq 1 ]; then
+    gammastep -P -O 4500
+else
+    gammastep -P -O 6300
+fi

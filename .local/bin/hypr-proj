@@ -1,0 +1,27 @@
+#!/bin/sh
+
+## For Hyprland
+# PRI_MON="eDP-1"
+#
+# SEC_MON="$(hyprctl monitors | grep 'Monitor' | awk '{print $2}' | grep -v "$PRI_MON" | fzf --prompt "Which to mirror")"
+
+# if [ -z "$SEC_MON" ]; then
+#     echo "No secondary monitor selected."
+#     exit 1
+# fi
+#
+# hyprctl keyword monitor ${PRI_MON},preferred,auto,1 &&
+# hyprctl keyword monitor ${SEC_MON},1920x1080,auto,1,mirror,${PRI_MON}
+
+PRI_MON="eDP-1"
+
+SEC_MON=$(swaymsg -t get_outputs | jq -r '.[] | select(.name != "'$PRI_MON'" and .active == false) | .name' | fzf --prompt "Which to mirror")
+
+if [ -z "$SEC_MON" ]; then
+    echo "No monitor selected or found."
+    exit 1
+fi
+
+swaymsg output "$PRI_MON" mode 1920x1080 position 0 0
+swaymsg output "$SEC_MON" enable mode 1920x1080 position 0 0
+

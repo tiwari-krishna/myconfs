@@ -1,6 +1,6 @@
 #!/bin/sh
 
-opt="$(printf Quit\\nKalika\\nRadioNepal\\nMadhyabinduFM\\nHindiSongs\\nUjyaalo\\nAsal-Sathi\\nSongs\\nClassic | tofi --prompt-text "Select a Radio To Play:")"
+opt="$(printf Quit\\nKalika\\nRadioNepal\\nMadhyabinduFM\\nHindiSongs\\nUjyaalo\\nAsal-Sathi\\nSongs\\nClassic | fuzzel --dmenu --prompt "Select a Radio To Play:")"
 
 case "$opt" in
         Quit) killall mpv; notify-send "Killing Radio" &

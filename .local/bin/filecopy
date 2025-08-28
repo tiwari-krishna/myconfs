@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <file>"
+    exit 1
+fi
+
+FILE="$1"
+
+if ! command -v wl-copy >/dev/null 2>&1; then
+    echo "wl-copy is required"
+    exit 1
+fi
+
+wl-copy --type text/uri-list "file://$(readlink -f "$FILE")"

@@ -19,15 +19,6 @@ window#waybar.hidden {
   opacity: 1;
 }
 
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
 window#waybar.termite {
   background-color: #3f3f3f;
 }

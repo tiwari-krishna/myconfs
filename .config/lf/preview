@@ -1,0 +1,51 @@
+#!/bin/sh
+
+FILE="$1"
+WIDTH="$2"
+
+if [ -f "$FILE" ]; then
+    mimetype=$(file --dereference --brief --mime-type -- "$FILE")
+
+    case "$mimetype" in
+        text/*|application/json|application/x-ndjson|*xml)
+            bat --style=plain --paging=never --color=always --terminal-width "$WIDTH" "$FILE" ;;
+        application/pdf)
+            # Convert first page of PDF to text for preview
+            pdftotext -l 1 -nopgbrk "$FILE" - | bat --style=plain --paging=never --color=always --terminal-width "$WIDTH" -
+            ;;
+        application/x-tar|application/gzip|application/x-gzip)
+            case "$FILE" in
+                *.tgz|*.tar.gz) tar tzf "$FILE" ;;
+                *.tar.bz2|*.tbz2) tar tjf "$FILE" ;;
+                *.tar.txz|*.txz) xz --list "$FILE" ;;
+                *.tar) tar tf "$FILE" ;;
+            esac
+            ;;
+        application/zip|application/java-archive)
+            unzip -l "$FILE"
+            ;;
+        application/x-rar)
+            unrar l "$FILE"
+            ;;
+        application/x-7z-compressed)
+            7z l "$FILE"
+            ;;
+        application/x-iso9660-image)
+            iso-info --no-header -l "$FILE"
+            ;;
+        text/csv)
+            sed 's/,/\n/g' "$FILE"
+            ;;
+        application/x-bittorrent)
+            transmission-show "$FILE"
+            ;;
+        *)
+            # Show basic file info for unsupported files
+            size_bytes=$(stat --printf="%s" "$FILE")
+            size_mb=$(awk "BEGIN {printf \"%.1f\", $size_bytes/1024/1024}")
+            echo "File: $FILE"
+            echo "Size: ${size_mb} MB"
+            echo "Type: $mimetype"
+            ;;
+    esac
+fi

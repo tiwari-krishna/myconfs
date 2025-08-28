@@ -1,91 +1,183 @@
 # Basic Settings
-#set hidden true
-set shell bash
+set drawbox true
+set hidden false
+set shell zsh
 set shellopts '-eu'
 set ignorecase true
+set ratios 1:3:5
+# set icons true
+
+set previewer ~/.config/lf/preview
+set preview true
+
+set truncatechar "…"
+set scrolloff 5
+
+set promptfmt "
+\033[38;2;255;255;255m %w 
+\033[38;2;40;47;62;48;2;58;67;89m
+\033[38;2;255;255;255m %f 
+\033[;38;2;58;67;89;49m\033[m"
 
 # Custom Functions
 cmd mkdir ${{
-  printf "Directory Name: "
-  read ans
-  mkdir $ans
+    printf "Directory Name: "
+    read ans
+    mkdir "$ans"
 }}
 
 cmd mkfile ${{
-  printf "File Name: "
-  read ans
-  touch $ans && $EDITOR $ans
+    printf "File Name: "
+    read ans
+    touch "$ans"
 }}
 
+cmd chmod ${{
+  printf "Mode Bits: "
+  read ans
+
+  for file in "$fx"
+  do
+    chmod $ans $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+%mkdir -p ~/.cache/Trash/
+
+map ` !true
+
 cmd del %mv $f ~/.cache/Trash
+cmd zip %zip -r "$f" "$f"
 
 # Archive bindings
 cmd unarchive ${{
-  case "$f" in
-      *.zip) unzip "$f" ;;
-			*.rar) unrar "$f" ;;
-      *.tar.gz) tar -xzvf "$f" ;;
-      *.tar.bz2) tar -xjvf "$f" ;;
-      *.tar) tar -xvf "$f" ;;
-      *.tar.bz2)   tar xjf "$f"   ;;
-      *.tar.gz)    tar xzf "$f"   ;;
-      *.bz2)       bunzip2 "$f"   ;;
-      *.rar)       unrar x "$f"   ;;
-      *.gz)        gunzip "$f"    ;;
-      *.tar)       tar xf "$f"    ;;
-      *.tbz2)      tar xjf "$f"   ;;
-      *.tgz)       tar xzf "$f"   ;;
-      *.zip)       unzip "$f"     ;;
-      *.Z)         uncompress "$f";;
-      *.7z)        7z x "$f"      ;;
-      *.deb)       ar x "$f"      ;;
-      *.tar.xz)    tar xf "$f"    ;;
-      *.tar.zst)   unzstd "$f"    ;;
-      *)           echo "'$f' cannot be extracted via ex()" ;;
-  esac
+    case "$f" in
+        *.zip) unzip "$f" ;;
+        *.rar) unrar x "$f" ;;
+        *.tar.gz|*.tgz) tar xzf "$f" ;;
+        *.tar.bz2|*.tbz2) tar xjf "$f" ;;
+        *.tar.xz) tar xf "$f" ;;
+        *.tar.zst) unzstd "$f" ;;
+        *.tar) tar xf "$f" ;;
+        *.bz2) bunzip2 "$f" ;;
+        *.gz) gunzip "$f" ;;
+        *.Z) uncompress "$f" ;;
+        *.7z) 7z x "$f" ;;
+        *.deb) 7z x "$f" ;;
+        *) echo "'$f' cannot be extracted via ex()" ;;
+    esac
 }}
 
+
 cmd open ${{
-    case $(file --mime-type "$f" -bL) in
-        text/*) $EDITOR "$f";;
-				audio/*) mpv "$f";;
-				application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura "$fx" >/dev/null 2>&1 ;;
-				video/*) setsid mpv "$f" > /dev/null 2 2>&1 & ;;
-				image/x-xcf) setsid -f gimp "$f" >/dev/null 2>&1 ;;
-				image/*) setsid -f imv "$f" >/dev/null 2>&1 ;;
-				application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/octet-stream|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template|application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.oasis.opendocument.presentation|application/vnd.ms-powerpoint|application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template|application/vnd.oasis.opendocument.formula|application/vnd.oasis.opendocument.database) setsid -f libreoffice "$fx" >/dev/null 2>&1 ;;
-        *) for f in $f; do setsid $OPENER "$f" > /dev/null 2> /dev/null & done;;
-    esac 
+    mime_type=$(file --mime-type "$f" -bL)
+    case "$mime_type" in
+        text/html) ${EDITOR:-nvim} "$f" ;;
+        text/*) $EDITOR "$f" ;;
+        audio/*) mpv "$f" ;;
+        video/*) setsid mpv "$f" >/dev/null 2>&1 & ;;
+        image/x-xcf) setsid -f gimp "$f" >/dev/null 2>&1 ;;
+        image/*) setsid -f imv "$f" >/dev/null 2>&1 ;;
+        application/pdf|application/vnd.djvu|application/epub*) setsid -f zathura "$f" >/dev/null 2>&1 ;;
+        application/vnd.openxmlformats-officedocument.wordprocessingml.document|application/vnd.oasis.opendocument.text|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|application/vnd.oasis.opendocument.spreadsheet|application/vnd.oasis.opendocument.spreadsheet-template|application/vnd.openxmlformats-officedocument.presentationml.presentation|application/vnd.oasis.opendocument.presentation|application/vnd.oasis.opendocument.presentation-template|application/vnd.ms-powerpoint|application/vnd.oasis.opendocument.graphics|application/vnd.oasis.opendocument.graphics-template|application/vnd.oasis.opendocument.formula|application/vnd.oasis.opendocument.database) setsid -f libreoffice "$f" >/dev/null 2>&1 ;;
+        *) xdg-open "$f" >/dev/null 2>&1 ;;
+    esac
+}}
+
+cmd fzf_edit ${{
+    file=$(find . -type f 2>/dev/null | fzf --height 40% --reverse --border)
+    [ -n "$file" ] && $EDITOR "$file"
+}}
+
+cmd fzf_cd ${{
+    target=$(find . -type f -o -type d 2>/dev/null | fzf --height 40% --reverse --border)
+    if [ -n "$target" ]; then
+        dir=$(dirname "$target")
+        base=$(basename "$target")
+        lf -remote "send $id cd \"$dir\"" 2>/dev/null
+        sleep 0.05
+        lf -remote "send $id select \"$base\"" 2>/dev/null
+    fi
+}}
+
+cmd copy_path ${{
+    target="${f:-$PWD}"
+    if [[ "$target" == "$HOME"* ]]; then
+        target="~${target#$HOME}"
+    fi
+    escaped_target="${target// /\\ }"
+    printf "%s" "$escaped_target" | wl-copy
+    echo "Copied: $escaped_target"
+}}
+
+## Bookmarking stuff
+cmd bookmark_add ${{
+    BOOKMARK_FILE="$HOME/.config/lf/bookmarks"
+    mkdir -p "$(dirname "$BOOKMARK_FILE")"
+    touch "$BOOKMARK_FILE"
+    dir="$PWD"
+    [[ "$dir" == "$HOME"* ]] && dir="~${dir#$HOME}"
+    grep -Fxq "$dir" "$BOOKMARK_FILE" || echo "$dir" >> "$BOOKMARK_FILE"
+    echo "Bookmarked: $dir"
+}}
+
+cmd bookmark_go ${{
+    BOOKMARK_FILE="$HOME/.config/lf/bookmarks"
+    target=$(cat "$BOOKMARK_FILE" | fzf --height 40% --reverse --border)
+    [ -n "$target" ] || exit 0
+    target="${target/#\~/$HOME}"
+    lf -remote "send $id cd \"$target\"" 2>/dev/null
+}}
+
+cmd copyfile ${{
+    sh ~/.local/bin/filecopy "$f"
+}}
+
+cmd edit-cwd ${{
+    nvim "$PWD"
 }}
 
 # Bindings
 map d
 map r
 map m
+map y
+map b
 
 map rx unarchive
-map rg $wine "$f"
 
 # Basic Functions
+map <enter> open
+map bo bookmark_go
+map bi bookmark_add
 map . set hidden!
 map dt del
-map dDD delete
+map dD delete
 map p paste
 map dd cut
-map yy copy
-map <enter> open
 map R reload
 map mf mkfile
 map md mkdir
 map C clear
 map a rename
+map zo !fzf-open
+map zz fzf_cd
+map zn fzf_edit
+map yy copy
+map yp copy_path
+map yf copyfile
+map on edit-cwd
+map zip zip
+map ch chmod
 
 map J :updir; set dironly true; down; set dironly false; open
 map K :updir; set dironly true; up; set dironly false; open
 
 # Movement
-map gd cd ~/Downloads
-map gc cd ~/.config
-map gs cd ~/.local/bin
-map gt cd ~/.cache/Trash/
-
+map gdo cd ~/Downloads
+map gdd cd ~/Data
+map gcc cd ~/.config
+map grp cd ~/repo
+map ghh cd ~/

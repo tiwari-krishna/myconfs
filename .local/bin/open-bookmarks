@@ -1,7 +1,7 @@
 #!/bin/sh
 
 brow=$BROWSER
-togo=$(printf YouTube\\nOdysee\\nChess\\nLichess\\nArchWiki\\nGithub\\nGmail\\nReddit\\nFacebook\\nSuckless\\nMessenger\\nSpotify\\nLibrary\\nTorrents | tofi --prompt-text "Where to go?")
+togo=$(printf YouTube\\nOdysee\\nChess\\nLichess\\nArchWiki\\nGithub\\nGmail\\nReddit\\nFacebook\\nSuckless\\nMessenger\\nSpotify\\nLibrary\\nTorrents | fuzzel --dmenu --prompt "Where to go?")
 
 case "$togo" in
         Chess) $brow "https://chess.com/" &

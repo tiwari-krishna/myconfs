@@ -3,36 +3,36 @@ draw_bold_text_with_bright_colors = false
 transparent_background_colors = false
 
 [colors.bright]
-black = "0x8F8F8F"
-blue = "0x9cdcfe"
-cyan = "0x8fbcbb"
-green = "0xB5CEA8"
-magenta = "0xc586c0"
-red = "0xD16969"
-white = "0xeceff4"
-yellow = "0xdcdcaa"
+black = "0x565f7e"
+blue = "0x8bb7ff"
+cyan = "0x9be7ff"
+green = "0xb8eb7f"
+magenta = "0xd1b9ff"
+red = "0xff869a"
+white = "0xd1d9ff"
+yellow = "0xffd28a"
 
 [colors.cursor]
 cursor = "#e3cccc"
 text = "#211e1e"
 
 [colors.normal]
-black = "0x2F2F2F"
-blue = "0x569CD6"
-cyan = "0x88C0D0"
-green = "0x608B4E"
-magenta = "0x646695"
-red = "0xF44747"
-white = "0xE5E9F0"
-yellow = "0xD7BA7D"
+black = "0x15161E"
+blue = "0x7aa2f7"
+cyan = "0x7dcfff"
+green = "0x9ece6a"
+magenta = "0xbb9af7"
+red = "0xf7768e"
+white = "0xa9b1d6"
+yellow = "0xe0af68"
 
 [colors.primary]
-background = "0x1E1E1E"
-foreground = "0xD4D4D4"
+background = "0x1e1e1e"
+foreground = "0xd0d7ff"
 
 [colors.selection]
-background = "#cccccc"
-text = "#555555"
+background = "#3b4261"
+text = "#d0d7ff"
 
 [cursor]
 blink_interval = 750
@@ -49,7 +49,7 @@ TERM = "alacritty"
 
 [font]
 builtin_box_drawing = true
-size = 12
+size = 13
 
 [font.bold]
 family = "monospace"
@@ -488,7 +488,7 @@ dynamic_title = true
 #gtk_theme_variant = "None"
 #history = 10000
 #multiplier = 3
-opacity = 0.98
+opacity = 1.0 
 startup_mode = "Windowed"
 
 [window.class]

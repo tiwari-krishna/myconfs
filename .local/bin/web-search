@@ -1,7 +1,7 @@
 #!/bin/sh
 
-seareng="$(printf Searx\\nGoogle\\nDuckduckGo\\nYouTube\\nBrave\\nArchWiki\\nWikipedia\\nUrbanDict\\nGentooWiki | tofi --prompt-text "Select a Search Engine To Search:")"
-term="$(printf "%s" | tofi --prompt-text "Search Terms:")"
+seareng="$(printf Searx\\nGoogle\\nDuckduckGo\\nYouTube\\nBrave\\nArchWiki\\nWikipedia\\nUrbanDict\\nGentooWiki | fuzzel --dmenu --prompt "Select a Search Engine To Search:")"
+term="$(printf "%s" | fuzzel --dmenu --prompt "Search Terms:")"
 brow="$BROWSER"
 
 case "$seareng" in

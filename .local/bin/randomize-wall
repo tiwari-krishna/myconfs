@@ -1,0 +1,9 @@
+#!/bin/sh
+
+WALLPAPERS="$HOME/Data/Media/wallpapers"
+CACHE_WALLPAPER="$HOME/.cache/wall"
+
+cp -f "$(find "$WALLPAPERS" -type f | shuf -n 1)" "$CACHE_WALLPAPER"
+pkill -f swaybg
+waybg &
+exit 0

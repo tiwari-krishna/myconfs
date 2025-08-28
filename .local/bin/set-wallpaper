@@ -1,5 +1,5 @@
 #!/bin/sh
 
 cp -f $(imv-wayland $HOME/Data/Media/wallpapers) $HOME/.cache/wall &&
-killall hyprpaper;
-hyprpaper & exit 0
+killall swaybg;
+swaybg -m fill -i $HOME/.cache/wall & exit 0

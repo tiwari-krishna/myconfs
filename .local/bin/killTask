@@ -1,0 +1,13 @@
+#!/bin/bash
+
+task=$(ps -u $USER -o pid,comm --no-headers | grep -v "$$" | fuzzel --dmenu --prompt "What Process to kill? ")
+
+pid=$(echo $task | awk '{print $1}')
+
+if [[ -n "$pid" ]]; then
+    pkill -P "$pid"
+    kill "$pid"
+    notify-send "Killed process" "$task"
+else
+    notify-send "No process selected"
+fi

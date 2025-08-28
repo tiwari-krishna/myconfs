@@ -1,15 +1,15 @@
 #!/bin/sh
 
-cmd=$(printf "Poweroff\nReboot\nLock\nKillX\n" | tofi --prompt-text "Select a Power Option:" $*)
+cmd=$(printf "Poweroff\nReboot\nLock\nKillX\n" | fuzzel --dmenu --prompt "Select a Power Option:" $*)
 
 case "$cmd" in
-        Poweroff) sel=$(printf "Yes\\nNo" | tofi --prompt-text "Are You Sure?:");
+        Poweroff) sel=$(printf "Yes\\nNo" | fuzzel --dmenu --prompt "Are You Sure?:");
                 if [ "$sel" = "Yes" ]; then
                         poweroff || sudo poweroff & exit 1
                 else
                         exit 0
                 fi ;;
-	Reboot) sel=$(printf "Yes\\nNo" | tofi --prompt-text "Are You Sure?:");
+	Reboot) sel=$(printf "Yes\\nNo" | fuzzel --dmenu --prompt "Are You Sure?:");
                 if [ "$sel" = "Yes" ]; then
                         reboot || sudo reboot & exit 1
                 else

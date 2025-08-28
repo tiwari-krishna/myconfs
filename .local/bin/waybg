@@ -1,4 +1,4 @@
 #!/bin/sh
 
-killall hyprpaper;
-hyprpaper & exit 0
+killall swaybg;
+swaybg -m fill -i $HOME/.cache/wall & exit 0

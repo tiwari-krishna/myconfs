@@ -1,0 +1,249 @@
+# vim:ft=conf
+# Nerd Font icons for lf
+# Merged from lf defaults + Yazi icons.toml
+
+# ──────────────────────────────
+# File types (default mappings)
+# ──────────────────────────────
+ln           # LINK
+or           # ORPHAN
+tw      t     # STICKY_OTHER_WRITABLE
+ow           # OTHER_WRITABLE
+st      t     # STICKY
+di           # DIR
+pi      p     # FIFO
+so      s     # SOCK
+bd      b     # BLK
+cd      c     # CHR
+su      u     # SETUID
+sg      g     # SETGID
+ex           # EXEC
+fi           # FILE
+
+# ──────────────────────────────
+# Common extensions
+# ──────────────────────────────
+# Web
+*.html        
+*.htm         
+*.xhtml       
+*.css         
+*.scss        
+*.sass        
+*.less        
+*.json        
+*.yaml        
+*.yml         
+*.toml        
+*.ini         
+*.xml         󰗀
+*.csv         󰈛
+
+# Scripts
+*.js          
+*.mjs         
+*.cjs         
+*.ts          
+*.tsx         
+*.jsx         
+*.vue         
+*.svelte      
+*.py          
+*.rb          
+*.php         
+*.sh          
+*.bash        
+*.zsh         
+*.fish        
+*.ksh         
+*.ps1         
+*.pl          
+*.pm          
+*.t           
+*.lua         
+*.vim         
+*.java        
+*.c           
+*.h           
+*.cpp         
+*.hpp         
+*.rs          
+*.go          
+*.dart        
+*.swift       
+*.scala       
+*.kt          
+*.kts         
+*.hs          
+*.lhs         
+*.ml          λ
+*.mli         λ
+*.zig         
+*.cr          
+*.ex          
+*.exs         
+*.eex         
+*.leex        
+*.heex        
+*.clj         
+*.cljs        
+*.edn         
+
+# Docs
+*.md          
+*.mdx         
+*.rmd         
+*.org         
+*.tex         󰙩
+*.pdf         
+*.epub        
+*.djvu        
+*.rtf         
+*.doc         
+*.docx        
+*.odt         
+*.ppt         
+*.pptx        
+*.odp         
+*.xls         
+*.xlsx        
+*.ods         
+*.r           󰟔
+*.rproj       󰗆
+
+# Config / system
+*.conf        
+*.cfg         
+*.ini         
+*.bat         
+*.mk          
+*.makefile    
+*CMakeLists.txt  
+
+# Archives
+*.zip         
+*.tar         
+*.gz          
+*.tgz         
+*.xz          
+*.lz          
+*.bz2         
+*.7z          
+*.rar         
+*.zst         
+*.deb         
+*.rpm         
+*.apk         
+*.ipa         
+*.jar         
+*.war         
+*.ear         
+
+# video formats (extensions from dircolors defaults)
+*.jpg   
+*.jpeg  
+*.mjpg  
+*.mjpeg 
+*.gif   
+*.bmp   
+*.pbm   
+*.pgm   
+*.ppm   
+*.tga   
+*.xbm   
+*.xpm   
+*.tif   
+*.tiff  
+*.png   
+*.svg   
+*.svgz  
+*.mng   
+*.pcx   
+*.xcf   
+*.xwd   
+*.yuv   
+*.cgm   
+*.emf   
+
+*.mov   
+*.mpg   
+*.mpeg  
+*.m2v   
+*.mkv   
+*.webm  
+*.ogm   
+*.mp4   
+*.m4v   
+*.mp4v  
+*.vob   
+*.qt    
+*.nuv   
+*.wmv   
+*.asf   
+*.rm    
+*.rmvb  
+*.flc   
+*.avi   
+*.fli   
+*.flv   
+*.gl    
+*.dl    
+*.ogv   
+*.ogx   
+
+# audio formats (extensions from dircolors defaults)
+*.aac   
+*.au    
+*.flac  
+*.m4a   
+*.mid   
+*.midi  
+*.mka   
+*.mp3   
+*.mpc   
+*.ogg   
+*.ra    
+*.wav   
+*.oga   
+*.opus  
+*.spx   
+*.xspf  
+
+# Misc
+*.log         
+*.lock        
+*.pem         
+*.key         
+*.crt         
+*.iso         
+*.bin         
+*.exe         
+*.msi         
+*.apk         
+*.ipa         
+
+# Special dirs
+*node_modules 
+*dockerfile   
+*docker-compose.yml  
+*docker-compose.yaml 
+*package.json 
+*tsconfig.json
+*Cargo.toml   
+*go.mod       
+*go.sum       
+*Makefile     
+
+# Special names
+*LICENSE      
+*README.md    
+*.gitignore   
+*.gitconfig   
+*.gitattributes 
+*.gitlab-ci.yml 
+*.bashrc      
+*.zshrc       
+*.vimrc       
+*Procfile     
+*Rakefile     
+*Gemfile      

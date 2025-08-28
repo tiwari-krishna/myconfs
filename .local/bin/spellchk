@@ -1,5 +1,5 @@
 #!/bin/sh
 
-char="$(echo "" | tofi --prompt-text "Enter the Word")"
+char="$(echo "" | fuzzel --dmenu --prompt "Enter the Word")"
 
-dym -c $char | tofi --prompt-text "Select the Correct Spelling" | wl-copy
+dym -c $char | fuzzel --prompt "Select the Correct Spelling" | wl-copy

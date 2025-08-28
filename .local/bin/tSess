@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Get list of tmux sessions + option for new session
+sessions=$(tmux ls 2>/dev/null | cut -d: -f1)
+option_new="-- Create new session --"
+
+# Use fzf to select session or create new
+choice=$(printf "%s\n%s\n" "$sessions" "$option_new" | fzf --prompt="Select or create tmux session: ")
+
+if [[ -z "$choice" ]]; then
+  echo "No session selected. Exiting."
+  exit 1
+fi
+
+if [[ "$choice" == "$option_new" ]]; then
+  # Prompt for new session name
+  read -p "Enter new session name: " new_name
+  if [[ -z "$new_name" ]]; then
+    echo "Session name cannot be empty."
+    exit 1
+  fi
+
+  # Create and attach new session
+  tmux new -s "$new_name"
+else
+  # Attach to selected session
+  tmux attach -t "$choice"
+fi
