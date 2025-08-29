@@ -1,0 +1,10 @@
+#!/bin/bash
+
+EMOJI_FILE="$HOME/.local/share/emoji.txt"
+
+chosen=$(cat "$EMOJI_FILE" | fuzzel --dmenu --prompt "Emoji: " )
+
+if [ -n "$chosen" ]; then
+    emoji=$(echo "$chosen" | awk '{print $1}')
+    echo -n "$emoji" | wl-copy
+fi
